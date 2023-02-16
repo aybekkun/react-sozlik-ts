@@ -1,0 +1,56 @@
+.popular {
+  background-image: url(../../assets/img/second.svg);
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 80px 0;
+  background-color: #ddfaff;
+  &__search {
+    margin-bottom: 40px;
+  }
+  &__subtitle {
+    margin-bottom: 20px;
+  }
+  &__list {
+    columns: 3;
+  }
+  &__item {
+    margin-bottom: 10px;
+    margin-right: 10px;
+    white-space: nowrap;
+    a {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 22px;
+      text-decoration-line: underline;
+      color: #0059fb;
+    }
+  }
+}
+
+.alphabet {
+  background-color: #fff;
+  padding: 40px;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.14);
+  border-radius: 8px;
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 57px;
+    max-width: 70px;
+    height: 30px;
+    background: #ddfaff;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    flex: 1;
+    color: #0059fb;
+  }
+}
