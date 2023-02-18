@@ -1,5 +1,4 @@
-import { Outlet, useLocation } from "react-router-dom";
-import Heading from "../../components/UI/Heading";
+import { Outlet } from "react-router-dom";
 import Wrapper from "../../components/UI/Wrapper";
 import WordsList from "../../components/WordsList";
 

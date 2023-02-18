@@ -64,8 +64,8 @@
 .result {
   position: absolute;
   margin: 0 10px;
-  top: auto;
-  bottom: 108px;
+  top: 200px;
+  height: max-content;
   left: 10px;
   right: 85px;
   box-shadow: 0px 4px 14px rgb(0 0 0 / 14%);
@@ -103,6 +103,7 @@
     }
   }
   .result {
+    top: 40%;
     right: 10px;
   }
 }

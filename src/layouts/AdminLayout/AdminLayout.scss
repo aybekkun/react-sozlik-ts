@@ -1,0 +1,13 @@
+.admin {
+  display: flex;
+  min-height: 100vh;
+  &__sidebar {
+    flex-shrink: 0;
+    flex-basis: 270px;
+    background-color: #16171b;
+  }
+  &__main {
+    flex: 1;
+    padding: 20px;
+  }
+}

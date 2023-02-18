@@ -1,11 +1,10 @@
 import React, { DetailedHTMLProps } from "react";
 import "./Heading.scss";
-type HeadingProps = {
-  props?: any;
+interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   title?: string;
   className?: string;
-};
-const Heading = ({ props, title, className }: HeadingProps) => {
+}
+const Heading = ({ title, className, ...props }: HeadingProps) => {
   return (
     <h4 {...props} className={`heading ${className}`}>
       {title}

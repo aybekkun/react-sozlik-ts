@@ -1,11 +1,11 @@
 import axios, {  InternalAxiosRequestConfig, AxiosRequestHeaders } from "axios";
 
 const $host = axios.create({
-  baseURL: process.env.VITE_APP_API_URL,
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 const $authHost = axios.create({
-  baseURL: process.env.VITE_APP_API_URL,
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 $authHost.interceptors.request.use((config: InternalAxiosRequestConfig) => {

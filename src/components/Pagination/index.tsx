@@ -2,9 +2,15 @@ import React from "react";
 import ReactPaginate from "react-paginate";
 
 import "./Pagination.scss";
-const Pagination = () => {
+type PaginationProps = {
+  total: number;
+  currentPage: number;
+  onChangePage: (id: number) => void;
+};
+const Pagination = ({ total, currentPage, onChangePage }: PaginationProps) => {
   const handlePageClick = (e: { selected: number }) => {
     console.log(e.selected);
+    onChangePage(e.selected + 1);
   };
 
   return (
@@ -14,8 +20,9 @@ const Pagination = () => {
       nextLabel=">"
       onPageChange={handlePageClick}
       pageRangeDisplayed={1}
-      pageCount={100}
+      pageCount={total}
       previousLabel="<"
+      forcePage={currentPage - 1}
       // @ts-ignore
       renderOnZeroPageCount={null}
     />

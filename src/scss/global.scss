@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: "Open-Sans", sans-serif;
 }
@@ -12,7 +15,8 @@ body {
   background-image: url(../assets/img/ab.svg);
   background-repeat: no-repeat;
   background-size: contain;
-  background-position: top center;
+  background-position: center center;
+  min-height: 100vh;
   padding: 80px 0;
   @media (max-width: 800px) {
     background-size: cover;
