@@ -46,10 +46,7 @@ const AdminEditWord = () => {
       //@ts-ignore
       fd.append("antonyms", JSON.parse(JSON.stringify(antIds)));
       if (id) {
-        await dispatch(updateWord({ id: id, data: fd })).catch((err) => {
-          alert("Request failed!");
-        });
-
+        await dispatch(updateWord({ id: id, data: fd }));
       }
     }
   );
@@ -81,7 +78,8 @@ const AdminEditWord = () => {
     if (selectedWord.synonyms) {
       setSynIds(selectedWord.synonyms.map((item) => item.id));
     }
-  }, [selectedWord]);
+  }, [selectedWord.id]);
+
   return (
     <>
       <div className="adwords">

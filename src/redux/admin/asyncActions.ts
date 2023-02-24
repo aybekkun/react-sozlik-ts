@@ -78,8 +78,13 @@ type updateWordProps = {
 };
 export const updateWord = createAsyncThunk("admin/updateWord", async (params: updateWordProps, thunkAPI) => {
   try {
-    const res = await $authHost.put(`/words/${params.id}`, params.data);
-    return res;
+    const { id, ...fd } = params;
+    console.log(params);
+    
+    const { data } = await $authHost.put(`/words/${id}`, fd, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return data;
   } catch (error) {
     return thunkAPI.rejectWithValue("Ошибка " + error);
   }
