@@ -26,3 +26,16 @@ export const fetchWords = createAsyncThunk("words/fetchWords", async (params: IS
     return thunkAPI.rejectWithValue("Ошибка " + error);
   }
 });
+
+
+export const fetchWordsDay= createAsyncThunk("words/fetchWordsDay", async (params: ISearchProps, thunkAPI) => {
+  try {
+    const { data } = await $host.get(`/wordsday`, {
+      params: params,
+      signal: params.signal,
+    });
+    return data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue("Ошибка " + error);
+  }
+});

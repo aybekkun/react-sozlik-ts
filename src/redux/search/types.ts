@@ -5,9 +5,12 @@ export interface ISearchState extends ISearch {
   total: number;
   searchValue: string;
   searchListValue:string;
+  searchPopularValue:string;
   searchLetter:string;
   isWordsListLoading: boolean;
   wordsList: ISearchData[];
+  topSearch: ISearchData[];
+  topSearchValue: string;
   popularList: ISearchData[];
   isPopularListLoading:boolean;
   categories:ICategoriesData[];

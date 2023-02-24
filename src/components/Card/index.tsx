@@ -5,7 +5,8 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import "./Card.scss";
 import { Skeleton } from "@mui/material";
 import StopIcon from "@mui/icons-material/Stop";
-import audioSrc from "../../assets/audio.mp3";
+import { _audioRoute } from "../../api/audioroute";
+
 type CardProps = {
   id?: number;
   description?: string;
@@ -58,12 +59,16 @@ const Card = ({ type, id, description, audio, title }: CardProps) => {
       </div>
       <div className="card__title-box">
         <h3 className="card__title">{title ? title : <Skeleton width={100} variant="text" />}</h3>
-        {!audio && audioButtons}
+        {audio && audioButtons}
       </div>
       <p className="card__desc">{description ? description : <Skeleton width={"100%"} height={"3rem"} />}</p>
-      <audio controls ref={audioRef} style={{ display: "none" }}>
-        <source src={audioSrc} type="audio/mp3" />
-      </audio>
+      {audio && (
+        <audio controls ref={audioRef} style={{ display: "none" }}>
+          <source src={`${_audioRoute}/${audio}`} type="audio/mp3" />
+          <source src={`${_audioRoute}/${audio}`}type="audio/ogg" />
+          <source src={`${_audioRoute}/${audio}`} type="audio/wav" />
+        </audio>
+      )}
     </div>
   );
 };

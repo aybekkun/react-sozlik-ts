@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchCategories, fetchPopularList, fetchSearchWord, fetchWordsList } from "./asyncActions";
+import { fetchCategories, fetchPopularList, fetchSearchWord, fetchTopSearchWord, fetchWordsList } from "./asyncActions";
 import { ICategories, ISearch, ISearchState } from "./types";
 
 const initialState: ISearchState = {
   data: [],
+  topSearch: [],
+  topSearchValue: "",
   total: 0,
   currentPage: 1,
   isLoading: false,
@@ -14,6 +16,7 @@ const initialState: ISearchState = {
   count: 0,
   searchValue: "",
   searchListValue: "",
+  searchPopularValue: "",
   searchLetter: "",
   categories: [
     {
@@ -38,6 +41,9 @@ export const searchSlice = createSlice({
     setSearchValue(state, action) {
       state.searchValue = action.payload;
     },
+    setTopSearchValue(state, action) {
+      state.topSearchValue = action.payload;
+    },
     setSearchListValue(state, action) {
       state.searchListValue = action.payload;
       state.searchLetter = "";
@@ -45,6 +51,9 @@ export const searchSlice = createSlice({
     setSearchLetter(state, action) {
       state.searchListValue = "";
       state.searchLetter = action.payload;
+    },
+    setSearchPopularValue(stata, action) {
+      stata.searchPopularValue = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -58,6 +67,13 @@ export const searchSlice = createSlice({
     builder.addCase(fetchSearchWord.rejected, (state) => {
       state.isLoading = false;
       state.data = [];
+    });
+    builder.addCase(fetchTopSearchWord.fulfilled, (state, action: PayloadAction<ISearch>) => {
+      state.topSearch = action.payload.data;
+    });
+    builder.addCase(fetchTopSearchWord.pending, (state) => {});
+    builder.addCase(fetchTopSearchWord.rejected, (state) => {
+      state.topSearch = [];
     });
     builder.addCase(fetchWordsList.fulfilled, (state, action: PayloadAction<ISearch>) => {
       state.isWordsListLoading = false;
@@ -92,6 +108,14 @@ export const searchSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setSearchPage, setSearchCount, setSearchValue, setSearchListValue,setSearchLetter } = searchSlice.actions;
+export const {
+  setSearchPage,
+  setSearchCount,
+  setSearchValue,
+  setSearchPopularValue,
+  setSearchListValue,
+  setSearchLetter,
+  setTopSearchValue,
+} = searchSlice.actions;
 
 export default searchSlice.reducer;

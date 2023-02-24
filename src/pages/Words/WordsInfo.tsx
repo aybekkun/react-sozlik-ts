@@ -19,13 +19,15 @@ const WordsInfo = () => {
 
   return (
     <div className="words__info">
-      <ul className="categories">
-        {categories.map((item, i) => (
-          <li key={i} className={`categories__item ${item.id === selectedWord.categories[0].id ? "active" : ""}`}>
-            {getLang() ? item.latin : item.kiril}
-          </li>
-        ))}
-      </ul>
+      {categories.length > 0 && (
+        <ul className="categories">
+          {categories.map((item, i) => (
+            <li key={i} className={`categories__item ${item.id === selectedWord.categories[0].id ? "active" : ""}`}>
+              {getLang() ? item.latin : item.kiril}
+            </li>
+          ))}
+        </ul>
+      )}
       <Card
         title={getLang() ? selectedWord.latin : selectedWord.kiril}
         description={getLang() ? selectedWord.description_latin : selectedWord.description_kiril}

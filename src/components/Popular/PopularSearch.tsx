@@ -8,7 +8,7 @@ import useAppSelector from "../../hooks/useAppSelector.hook";
 import { fetchPopularList } from "../../redux/search/asyncActions";
 import { setSearchListValue } from "../../redux/search/slice";
 import Heading from "../UI/Heading";
-
+ 
 const PopularSearch = () => {
   const dispatch = useAppDispatch();
   const { isPopularListLoading, popularList } = useAppSelector((state) => state.search);

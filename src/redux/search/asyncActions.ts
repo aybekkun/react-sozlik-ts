@@ -15,6 +15,17 @@ export const fetchSearchWord = createAsyncThunk("search/fetchSearchWord", async 
   }
 });
 
+export const fetchTopSearchWord = createAsyncThunk("search/fetchTopSearchWord", async (params: ISearchProps, thunkAPI) => {
+  try {
+    const { data } = await $host.get<ISearch>(`/search`, {
+      params: params,
+      signal: params.signal,
+    });
+    return data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue("Ошибка " + error);
+  }
+});
 export const fetchWordsList = createAsyncThunk("search/fetchWordsList", async (params: ISearchProps, thunkAPI) => {
   try {
     const { data } = await $host.get<ISearch>(`/search`, {

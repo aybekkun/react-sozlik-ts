@@ -4,7 +4,9 @@ export interface IWordsState extends IWords {
   count: number;
   total: number;
   selectedWord: IWordData;
-  isWordLoading:boolean;
+  wordsDay : IWordData;
+  isWordLoading: boolean;
+  wordsCount: number;
 }
 
 export interface IWords {
@@ -29,6 +31,7 @@ export interface IWordData {
   categories: ICategory[];
   synonyms: any[];
   antonyms: any[];
+  created_at: Date | string;
 }
 
 export interface ICategory {

@@ -6,5 +6,5 @@ export interface ISearchProps {
   page?: number;
   name?: string;
   signal?: AbortSignal;
-  sortBy?: "kiril" | "latin" | "count";
+  sortBy?: "kiril" | "latin" | "count" | "date";
 }

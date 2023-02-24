@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchSingleWord, fetchWords } from "./asyncActions";
+import { fetchSingleWord, fetchWords, fetchWordsDay } from "./asyncActions";
 import { IWord, IWords, IWordsState } from "./types";
 
 const initialState: IWordsState = {
@@ -26,7 +26,28 @@ const initialState: IWordsState = {
     ],
     synonyms: [],
     antonyms: [],
+    created_at: "",
   },
+  wordsDay: {
+    id: 0,
+    latin: "",
+    kiril: "",
+    description_latin: "",
+    description_kiril: "",
+    count: "",
+    audio: null,
+    categories: [
+      {
+        id: 0,
+        latin: "",
+        kiril: "",
+      },
+    ],
+    synonyms: [],
+    antonyms: [],
+    created_at: "",
+  },
+  wordsCount: 0,
 };
 
 export const wordsSlice = createSlice({
@@ -37,7 +58,7 @@ export const wordsSlice = createSlice({
       state.currentPage = action.payload;
     },
     setWordsCount(state) {
-      state.count++;
+      state.wordsCount++;
     },
     setSelectedWord(state, action) {
       state.selectedWord = { ...state.selectedWord, id: 0, kiril: action.payload };
@@ -83,7 +104,11 @@ export const wordsSlice = createSlice({
         ],
         synonyms: [],
         antonyms: [],
+        created_at: "",
       };
+    });
+    builder.addCase(fetchWordsDay.fulfilled, (state, action) => {
+      state.wordsDay = action.payload.data;
     });
   },
 });

@@ -5,9 +5,127 @@
     flex-shrink: 0;
     flex-basis: 270px;
     background-color: #16171b;
+    position: relative;
+    color: #fff;
+  }
+  &__nav {
+    padding: 20px;
+    position: sticky;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .admin__link {
+      display: flex;
+      margin-bottom: 20px;
+      padding: 15px;
+      font-size: 20px;
+      &.active {
+        background: #282a2c;
+        border-radius: 12px;
+      }
+      span {
+        margin-left: 10px;
+      }
+    }
   }
   &__main {
+    position: relative;
     flex: 1;
     padding: 20px;
+  }
+  &__search {
+    margin-bottom: 40px;
+  }
+  &__input-box {
+    position: relative;
+    width: 550px;
+    color: #8f9092;
+    input {
+      width: 100%;
+      border: none;
+      background: #f3f5f7;
+      border-radius: 13px;
+      padding: 15px 50px;
+    }
+    .icon {
+      top: 50%;
+      transform: translateY(-50%);
+      right: 5px;
+      position: absolute;
+      font-size: 35px;
+      cursor: pointer;
+    }
+  }
+  &__result {
+    position: absolute;
+    width: 550px;
+    padding: 5px;
+    top: 74px;
+    background-color: #fff;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.14);
+    border-radius: 16px;
+    &-list {
+      li {
+        margin-bottom: 2px;
+        a {
+          padding: 3px;
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.adwords {
+  form {
+    .form {
+      display: flex;
+      gap: 20px;
+    }
+  }
+  &__search-result {
+    position: relative;
+
+    ul {
+      position: absolute;
+      z-index: 5;
+      left: 0;
+      right: 0;
+      padding: 3px;
+      background: #ffffff;
+      box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.14);
+      border-radius: 10px;
+      max-height: 200px;
+      overflow-y: scroll;
+      li {
+        margin-bottom: 5px;
+
+        border-bottom: 1px solid #000;
+     
+      }
+    }
+  }
+  &__select {
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+      li {
+        padding: 2px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        flex: 1;
+        max-width: max-content;
+        border-radius: 5px;
+        background-color: #c8dbff;
+      }
+    }
   }
 }
