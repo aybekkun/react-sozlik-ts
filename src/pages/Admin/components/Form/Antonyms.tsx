@@ -9,20 +9,25 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { IconButton, TextField } from "@mui/material";
 import { setSearchPopularValue } from "../../../../redux/search/slice";
 type AntonymsProps = {
+  data?: ISearchData[];
   ids: number[];
   onAdd: (arr: number[]) => void;
 };
-const Antonyms = ({ ids, onAdd }: AntonymsProps) => {
+const Antonyms = ({ ids, onAdd, data = [] }: AntonymsProps) => {
   const dispatch = useAppDispatch();
   const { popularList, searchPopularValue } = useAppSelector((state) => state.search);
   const [antonyms, setAntonyms] = useState<ISearchData[]>([]);
-
+  
   const debouncedValue = useDebounce<string>(searchPopularValue, 300);
   useEffect(() => {
     if (ids.length < 1) {
-      setAntonyms([])
+      setAntonyms([]);
     }
   }, [ids]);
+
+  useEffect(() => {
+    setAntonyms(data);
+  }, [data]);
   useEffect(() => {
     if (debouncedValue) {
       dispatch(fetchPopularList({ page: 1, limit: 100, search: debouncedValue }));

@@ -1,5 +1,5 @@
 export interface ISearchProps {
-  id?: number;
+  id?: number | string;
   search?: string;
   letter?: string;
   limit?: number;

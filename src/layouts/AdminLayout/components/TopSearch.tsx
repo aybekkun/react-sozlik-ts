@@ -8,7 +8,9 @@ import useDebounce from "../../../hooks/useDebounce.hook";
 import { setSearchValue, setTopSearchValue } from "../../../redux/search/slice";
 import { fetchTopSearchWord } from "../../../redux/search/asyncActions";
 import CloseIcon from "@mui/icons-material/Close";
+import { translit } from "../../../helpers/convertor/convertor";
 const TopSearch = () => {
+
   const dispatch = useAppDispatch();
   const { topSearchValue, topSearch } = useAppSelector((state) => state.search);
   const debouncedValue = useDebounce(topSearchValue, 300);
@@ -20,7 +22,7 @@ const TopSearch = () => {
       <ul className="admin__result-list">
         {topSearch.map((item, i) => (
           <li key={i}>
-            <Link to={"/"}>{item.latin}</Link>
+            <Link onClick={()=>dispatch(setTopSearchValue(""))} to={`/admin/words/${item.id}`}>{item.latin}</Link>
           </li>
         ))}
       </ul>

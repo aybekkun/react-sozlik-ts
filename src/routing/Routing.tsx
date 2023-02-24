@@ -6,6 +6,7 @@ import Main from "../layouts/Main";
 import About from "../pages/About";
 import AdminMain from "../pages/Admin";
 import AdminCategory from "../pages/Admin/AdminCategory";
+import AdminEditWord from "../pages/Admin/AdminEditWord";
 import AdminSingleWord from "../pages/Admin/AdminSingleWord";
 import AdminWords from "../pages/Admin/AdminWords";
 import Home from "../pages/Home";
@@ -46,6 +47,10 @@ const adminRoutes: IRoutes[] = [
   {
     path: "words",
     element: <AdminWords />,
+  },
+  {
+    path: "words/:id",
+    element: <AdminEditWord />,
   },
   { path: "adwords", element: <AdminSingleWord /> },
 ];

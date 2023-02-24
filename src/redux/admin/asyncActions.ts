@@ -72,3 +72,15 @@ export const deleteWord = createAsyncThunk("admin/deleteWord", async (id: number
     return thunkAPI.rejectWithValue("Ошибка " + error);
   }
 });
+type updateWordProps = {
+  id: string;
+  data: FormData;
+};
+export const updateWord = createAsyncThunk("admin/updateWord", async (params: updateWordProps, thunkAPI) => {
+  try {
+    const res = await $authHost.put(`/words/${params.id}`, params.data);
+    return res;
+  } catch (error) {
+    return thunkAPI.rejectWithValue("Ошибка " + error);
+  }
+});

@@ -6,7 +6,6 @@ import { IWord, IWords } from "./types";
 export const fetchSingleWord = createAsyncThunk("words/fetchSingleWord", async (params: { id: string }, thunkAPI) => {
   try {
     const { data } = await $host.get<IWord>(`/words/${params.id}`, {
-      params: params,
       // signal: params.signal,
     });
     return data;

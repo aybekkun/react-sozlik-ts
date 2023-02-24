@@ -1,13 +1,14 @@
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { Button, MenuItem, Select, SelectChangeEvent, Stack, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
-import { translit } from "../../helpers/convertor/convertor";
+import { useParams } from "react-router-dom";
 import useAppDispatch from "../../hooks/useAppDispatch.hook";
 import useAppSelector from "../../hooks/useAppSelector.hook";
 import useHandleFile from "../../hooks/useHandleFile.hook";
 import useSimpleForm from "../../hooks/useSimpleForm";
-import { createWord } from "../../redux/admin/asyncActions";
+import { updateWord } from "../../redux/admin/asyncActions";
 import { fetchCategories } from "../../redux/search/asyncActions";
+import { fetchSingleWord } from "../../redux/words/asyncActions";
 import Antonyms from "./components/Form/Antonyms";
 import Synonyms from "./components/Form/Synonyms";
 type FormType = {
@@ -16,14 +17,16 @@ type FormType = {
   description_latin: string;
   description_kiril: string;
 };
-const AdminSingleWord = () => {
+const AdminEditWord = () => {
   const dispatch = useAppDispatch();
   const { categories } = useAppSelector((state) => state.search);
+  const { selectedWord } = useAppSelector((state) => state.words);
+  const { id } = useParams();
   const [synIds, setSynIds] = useState<number[]>([]);
   const [antIds, setAntIds] = useState<number[]>([]);
   const [cat, setCat] = useState<string>("");
   const { file, handleFile, handleClearFile } = useHandleFile();
-  const { formData, handleInputChange, handleSubmit, isSendingForm, handleSetFormData } = useSimpleForm<FormType>(
+  const { formData, handleInputChange, handleSetFormData, handleSubmit, isSendingForm } = useSimpleForm<FormType>(
     { latin: "", kiril: "", description_latin: "", description_kiril: "" },
     async (args) => {
       const fd = new FormData();
@@ -42,25 +45,43 @@ const AdminSingleWord = () => {
       fd.append("synonyms", JSON.parse(JSON.stringify(synIds)));
       //@ts-ignore
       fd.append("antonyms", JSON.parse(JSON.stringify(antIds)));
-      await dispatch(createWord(fd));
-      setSynIds([]);
-      setAntIds([]);
-      handleClearFile();
+      if (id) {
+        await dispatch(updateWord({ id: id, data: fd })).catch((err) => {
+          alert("Request failed!");
+        });
+
+      }
     }
   );
   const { latin, kiril, description_latin, description_kiril } = formData;
   const onChangeCategories = (event: SelectChangeEvent) => {
     setCat(event.target.value);
   };
-  const onClickConvert = () => {
-    handleSetFormData({
-      description_latin: translit(description_kiril),
-      latin: translit(kiril),
-    });
-  };
   useEffect(() => {
     dispatch(fetchCategories());
   }, []);
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchSingleWord({ id: id }));
+    }
+  }, [id]);
+  useEffect(() => {
+    handleSetFormData({
+      latin: selectedWord.latin,
+      kiril: selectedWord.kiril,
+      description_kiril: selectedWord.description_kiril,
+      description_latin: selectedWord.description_latin,
+    });
+    if (selectedWord.categories.length > 0) {
+      setCat(String(selectedWord.categories[0].id));
+    }
+    if (selectedWord.antonyms) {
+      setAntIds(selectedWord.antonyms.map((item) => item.id));
+    }
+    if (selectedWord.synonyms) {
+      setSynIds(selectedWord.synonyms.map((item) => item.id));
+    }
+  }, [selectedWord]);
   return (
     <>
       <div className="adwords">
@@ -116,17 +137,13 @@ const AdminSingleWord = () => {
               </Button>
             </Stack>
             <Stack flex={1} spacing={2}>
-              <Synonyms ids={synIds} onAdd={(arr) => setSynIds(arr)} />
-              <Antonyms ids={antIds} onAdd={(arr) => setAntIds(arr)} />
+              <Synonyms data={selectedWord.synonyms} ids={synIds} onAdd={(arr) => setSynIds(arr)} />
+              <Antonyms data={selectedWord.antonyms} ids={antIds} onAdd={(arr) => setAntIds(arr)} />
             </Stack>
           </div>
-          <Stack sx={{ marginTop: "20px" }} direction={"row"} spacing={2}>
-            <Button disabled={isSendingForm} type="submit" variant="contained">
-              Submit
-            </Button>
-            <Button onClick={onClickConvert} variant="contained">Convertor</Button>
-          </Stack>
-
+          <Button disabled={isSendingForm} sx={{ marginTop: "20px" }} type="submit" variant="contained">
+            Edit
+          </Button>
           {/* <div className="adwords__search-result">
               <ul>{wordsList.length > 0 && wordsList.map((item, i) => <li key={i}>{item.latin}</li>)}</ul>
             </div> */}
@@ -136,4 +153,4 @@ const AdminSingleWord = () => {
   );
 };
 
-export default AdminSingleWord;
+export default AdminEditWord;

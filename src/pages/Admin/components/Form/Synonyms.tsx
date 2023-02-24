@@ -9,21 +9,27 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { IconButton, TextField } from "@mui/material";
 import { setSearchListValue } from "../../../../redux/search/slice";
 type SynonymsProps = {
+  data?: ISearchData[];
   ids: number[];
   onAdd: (arr: number[]) => void;
 };
-const Synonyms = ({ ids,onAdd }: SynonymsProps) => {
+const Synonyms = ({ ids, onAdd, data = [] }: SynonymsProps) => {
   const dispatch = useAppDispatch();
   const { wordsList, searchListValue } = useAppSelector((state) => state.search);
   const [synonyms, setSynonyms] = useState<ISearchData[]>([]);
 
-  const debouncedValue = useDebounce<string>(searchListValue, 300);
 
+  const debouncedValue = useDebounce<string>(searchListValue, 300);
   useEffect(() => {
     if (ids.length < 1) {
-      setSynonyms([])
+      setSynonyms([]);
     }
   }, [ids]);
+  
+  useEffect(() => {
+    setSynonyms(data);
+  }, [data]);
+
   useEffect(() => {
     if (debouncedValue) {
       dispatch(fetchWordsList({ page: 1, limit: 100, search: debouncedValue }));

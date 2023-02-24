@@ -9,6 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Stack } from "@mui/system";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import useAppDispatch from "../../../../hooks/useAppDispatch.hook";
 import useAppSelector from "../../../../hooks/useAppSelector.hook";
 import { deleteWord } from "../../../../redux/admin/asyncActions";
@@ -19,6 +20,7 @@ import DateFormat from "../UI/DateFormat";
 const WordsTable = () => {
   const dispatch = useAppDispatch();
   const { data, currentPage, total, wordsCount } = useAppSelector((state) => state.words);
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(fetchWords({ page: currentPage, limit: 10 }));
   }, [currentPage, wordsCount]);
@@ -66,7 +68,7 @@ const WordsTable = () => {
                 <TableCell align="left">
                   {
                     <Stack spacing={1} direction={"row"}>
-                      <Button size="small" variant="contained">
+                      <Button onClick={()=>navigate("/admin/words/"+item.id)} size="small" variant="contained">
                         Edit
                       </Button>
                       <IconButton onClick={() => onDelete(item.id)} size="small" color="error">

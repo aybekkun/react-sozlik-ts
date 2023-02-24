@@ -6,6 +6,9 @@ const useSimpleForm = <T extends {}>(initialState: T, onSubmit: (args: T) => voi
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  const handleSetFormData = (obj: any) => {
+    setFormData({ ...formData, ...obj });
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -15,7 +18,7 @@ const useSimpleForm = <T extends {}>(initialState: T, onSubmit: (args: T) => voi
     setFormData(initialState);
   };
 
-  return { formData, handleInputChange, handleSubmit, isSendingForm };
+  return { formData, handleInputChange, handleSetFormData, handleSubmit, isSendingForm };
 };
 
 export default useSimpleForm;
