@@ -52,7 +52,7 @@ const Card = ({ type, id, description, audio, title }: CardProps) => {
   return (
     <div className="card">
       <div className="card__top">
-        <Heading2 title={type ? "Kun so’zi" : "So’z tarifi"} />
+        <Heading2 title={type ? "Kun so’zi" : "Sóz mánisi"} />
         <button onClick={onClickShare} className="share">
           <ShareIcon /> Share
         </button>

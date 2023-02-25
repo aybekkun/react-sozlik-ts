@@ -52,7 +52,7 @@ const AdminSingleWord = () => {
       setSynIds([]);
       setAntIds([]);
       handleClearFile();
-      navigate("/admin/words")
+      navigate("/admin/words");
     }
   );
   const { latin, kiril, description_latin, description_kiril } = formData;
@@ -118,7 +118,7 @@ const AdminSingleWord = () => {
                 ))}
               </Select>
               <Button sx={{ flexShrink: 1 }} color="primary" aria-label="upload mp3" component="label">
-                <input hidden onChange={handleFile} accept="audio/*" type="file" />
+                <input hidden onChange={handleFile} accept=".mp3,.ogg,.wav" type="file" />
                 <VolumeUpIcon />
               </Button>
             </Stack>

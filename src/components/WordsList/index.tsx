@@ -1,6 +1,6 @@
 import { IconButton, Skeleton } from "@mui/material";
 import { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { WORDS_PAGE } from "../../helpers/constants/route";
 import { getLang } from "../../helpers/convertor/convertor";
 import useAppDispatch from "../../hooks/useAppDispatch.hook";
@@ -14,15 +14,42 @@ import "./WordsList.scss";
 const WordsList = () => {
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
+  const { id } = useParams();
   const { y } = useAppSelector((state) => state.scroll);
-
+  const { selectedWord } = useAppSelector((state) => state.words);
   const { wordsList, isWordsListLoading, searchListValue, currentPage, searchLetter, total } = useAppSelector(
     (state) => state.search
   );
 
   useEffect(() => {
-    dispatch(fetchWordsList({ page: currentPage, limit: 36, search: searchListValue, letter: searchLetter.toLowerCase() }));
-  }, [currentPage, searchListValue, searchLetter]);
+    if (pathname === WORDS_PAGE) {
+      dispatch(
+        fetchWordsList({
+          page: currentPage,
+          limit: 36,
+          search: "",
+          letter: searchLetter.toLowerCase(),
+        })
+      );
+    } else {
+      dispatch(
+        fetchWordsList({
+          page: currentPage,
+          limit: 36,
+          search: searchListValue,
+          letter: searchLetter.toLowerCase(),
+        })
+      );
+    }
+    dispatch(
+      fetchWordsList({
+        page: currentPage,
+        limit: 36,
+        search: searchListValue,
+        letter: searchLetter.toLowerCase(),
+      })
+    );
+  }, [currentPage, searchListValue, searchLetter, id, pathname]);
 
   const onChangePage = (i: number) => {
     dispatch(setSearchPage(i));
@@ -55,7 +82,7 @@ const WordsList = () => {
         ))}
       </ul>
     ) : (
-      <IconButton onClick={()=>dispatch(setSearchLetter(""))}>
+      <IconButton onClick={() => dispatch(setSearchLetter(""))}>
         <SearchOffIcon />
       </IconButton>
     );
