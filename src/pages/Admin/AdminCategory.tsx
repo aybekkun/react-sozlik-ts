@@ -8,7 +8,7 @@ const AdminCategory = () => {
   return (
     <>
       <Box mb={2} display={"flex"} alignItems="center" justifyContent={"space-between"}>
-        <Title mb={0} title="Category" />
+        <Title mb={0} title="Kategoriya" />
         <AddButtonCategory />
       </Box>
       <CategoryTable />

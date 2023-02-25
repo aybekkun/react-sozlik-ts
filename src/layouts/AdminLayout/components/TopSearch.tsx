@@ -10,7 +10,6 @@ import { fetchTopSearchWord } from "../../../redux/search/asyncActions";
 import CloseIcon from "@mui/icons-material/Close";
 import { translit } from "../../../helpers/convertor/convertor";
 const TopSearch = () => {
-
   const dispatch = useAppDispatch();
   const { topSearchValue, topSearch } = useAppSelector((state) => state.search);
   const debouncedValue = useDebounce(topSearchValue, 300);
@@ -22,7 +21,9 @@ const TopSearch = () => {
       <ul className="admin__result-list">
         {topSearch.map((item, i) => (
           <li key={i}>
-            <Link onClick={()=>dispatch(setTopSearchValue(""))} to={`/admin/words/${item.id}`}>{item.latin}</Link>
+            <Link onClick={() => dispatch(setTopSearchValue(""))} to={`/admin/words/${item.id}`}>
+              {item.latin}
+            </Link>
           </li>
         ))}
       </ul>
@@ -30,18 +31,25 @@ const TopSearch = () => {
   );
   return (
     <>
-      <div className="admin__search">
-        <div className="admin__input-box">
-          <input
-            value={topSearchValue}
-            onChange={(e) => dispatch(setTopSearchValue(e.target.value))}
-            className="admin__input"
-            type="text"
-            placeholder="search words"
-          />
-          {topSearchValue.length > 0 ? <CloseIcon onClick={()=>dispatch(setTopSearchValue(""))} className="icon" /> : <SearchIcon className="icon" />}
+      <div className="admin__search-box">
+        <div className="admin__search">
+          <div className="admin__input-box">
+            <input
+              value={topSearchValue}
+              onChange={(e) => dispatch(setTopSearchValue(e.target.value))}
+              className="admin__input"
+              type="text"
+              placeholder="search words"
+            />
+            {topSearchValue.length > 0 ? (
+              <CloseIcon onClick={() => dispatch(setTopSearchValue(""))} className="icon" />
+            ) : (
+              <SearchIcon className="icon" />
+            )}
+          </div>
+          {topSearchValue.length > 0 && searchItems}
         </div>
-        {topSearchValue.length > 0 && searchItems}
+        
       </div>
     </>
   );

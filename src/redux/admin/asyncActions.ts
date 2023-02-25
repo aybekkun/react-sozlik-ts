@@ -74,14 +74,12 @@ export const deleteWord = createAsyncThunk("admin/deleteWord", async (id: number
 });
 type updateWordProps = {
   id: string;
-  data: FormData;
+  fd: FormData;
 };
 export const updateWord = createAsyncThunk("admin/updateWord", async (params: updateWordProps, thunkAPI) => {
   try {
-    const { id, ...fd } = params;
-    console.log(params);
-    
-    const { data } = await $authHost.put(`/words/${id}`, fd, {
+    const { id, fd } = params;
+    const { data } = await $authHost.post(`/words/${id}`, fd, {
       headers: { "Content-Type": "multipart/form-data" },
     });
     return data;

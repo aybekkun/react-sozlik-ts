@@ -14,7 +14,10 @@ import { deleteCategory, fetchCategoriesByDate } from "../../../../redux/admin/a
 import { setCategoriesCount } from "../../../../redux/admin/slice";
 import DateFormat from "../UI/DateFormat";
 import EditButtonCategory from "../UI/EditButtonCategory";
-const CategoryTable = () => {
+type CategoryTableProps = {
+  hide?: boolean;
+};
+const CategoryTable = ({ hide = false }: CategoryTableProps) => {
   const dispatch = useAppDispatch();
   const { categories, categoriesCount } = useAppSelector((state) => state.admin);
   useEffect(() => {
@@ -30,7 +33,7 @@ const CategoryTable = () => {
   return (
     <>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table size={hide ? "small" : "medium"} sx={{ minWidth: 450 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell align="left">Latin</TableCell>

@@ -1,6 +1,7 @@
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { Button, MenuItem, Select, SelectChangeEvent, Stack, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { translit } from "../../helpers/convertor/convertor";
 import useAppDispatch from "../../hooks/useAppDispatch.hook";
 import useAppSelector from "../../hooks/useAppSelector.hook";
@@ -17,6 +18,7 @@ type FormType = {
   description_kiril: string;
 };
 const AdminSingleWord = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { categories } = useAppSelector((state) => state.search);
   const [synIds, setSynIds] = useState<number[]>([]);
@@ -42,10 +44,15 @@ const AdminSingleWord = () => {
       fd.append("synonyms", JSON.parse(JSON.stringify(synIds)));
       //@ts-ignore
       fd.append("antonyms", JSON.parse(JSON.stringify(antIds)));
-      await dispatch(createWord(fd));
+      await dispatch(createWord(fd))
+        .unwrap()
+        .catch((err) => {
+          alert("Данные не отправлены ошибка сети");
+        });
       setSynIds([]);
       setAntIds([]);
       handleClearFile();
+      navigate("/admin/words")
     }
   );
   const { latin, kiril, description_latin, description_kiril } = formData;
@@ -124,7 +131,9 @@ const AdminSingleWord = () => {
             <Button disabled={isSendingForm} type="submit" variant="contained">
               Submit
             </Button>
-            <Button onClick={onClickConvert} variant="contained">Convertor</Button>
+            <Button onClick={onClickConvert} variant="contained">
+              Convertor
+            </Button>
           </Stack>
 
           {/* <div className="adwords__search-result">

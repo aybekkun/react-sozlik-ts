@@ -1,7 +1,8 @@
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
-import { Button, MenuItem, Select, SelectChangeEvent, Stack, TextField } from "@mui/material";
+import { Button, MenuItem, Select, SelectChangeEvent, Snackbar, Stack, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { translit } from "../../helpers/convertor/convertor";
 import useAppDispatch from "../../hooks/useAppDispatch.hook";
 import useAppSelector from "../../hooks/useAppSelector.hook";
 import useHandleFile from "../../hooks/useHandleFile.hook";
@@ -18,6 +19,7 @@ type FormType = {
   description_kiril: string;
 };
 const AdminEditWord = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { categories } = useAppSelector((state) => state.search);
   const { selectedWord } = useAppSelector((state) => state.words);
@@ -30,10 +32,11 @@ const AdminEditWord = () => {
     { latin: "", kiril: "", description_latin: "", description_kiril: "" },
     async (args) => {
       const fd = new FormData();
-      fd.append("latin", latin.trim());
-      fd.append("kiril", kiril.trim());
-      fd.append("description_latin", description_latin.trim());
-      fd.append("description_kiril", description_kiril.trim());
+
+      fd.append("latin", args.latin.trim());
+      fd.append("kiril", args.kiril.trim());
+      fd.append("description_latin", args.description_latin.trim());
+      fd.append("description_kiril", args.description_kiril.trim());
       //@ts-ignore
       if (file) {
         fd.append("audio", file);
@@ -46,8 +49,13 @@ const AdminEditWord = () => {
       //@ts-ignore
       fd.append("antonyms", JSON.parse(JSON.stringify(antIds)));
       if (id) {
-        await dispatch(updateWord({ id: id, data: fd }));
+        await dispatch(updateWord({ id: id, fd: fd }))
+          .unwrap()
+          .catch((err) => {
+            alert("Данные не отправлены ошибка сети");
+          });
       }
+      navigate("/admin/words")
     }
   );
   const { latin, kiril, description_latin, description_kiril } = formData;
@@ -79,7 +87,12 @@ const AdminEditWord = () => {
       setSynIds(selectedWord.synonyms.map((item) => item.id));
     }
   }, [selectedWord.id]);
-
+  const onClickConvert = () => {
+    handleSetFormData({
+      description_latin: translit(description_kiril),
+      latin: translit(kiril),
+    });
+  };
   return (
     <>
       <div className="adwords">
@@ -139,9 +152,14 @@ const AdminEditWord = () => {
               <Antonyms data={selectedWord.antonyms} ids={antIds} onAdd={(arr) => setAntIds(arr)} />
             </Stack>
           </div>
-          <Button disabled={isSendingForm} sx={{ marginTop: "20px" }} type="submit" variant="contained">
-            Edit
-          </Button>
+          <Stack sx={{ marginTop: "20px" }} direction={"row"} spacing={2}>
+            <Button disabled={isSendingForm} type="submit" variant="contained">
+              Submit
+            </Button>
+            <Button onClick={onClickConvert} variant="contained">
+              Convertor
+            </Button>
+          </Stack>
           {/* <div className="adwords__search-result">
               <ul>{wordsList.length > 0 && wordsList.map((item, i) => <li key={i}>{item.latin}</li>)}</ul>
             </div> */}

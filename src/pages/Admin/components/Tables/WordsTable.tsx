@@ -17,12 +17,19 @@ import { fetchWords } from "../../../../redux/words/asyncActions";
 import { setWordsCount, setWordsPage } from "../../../../redux/words/slice";
 import Audio from "../UI/Audio";
 import DateFormat from "../UI/DateFormat";
-const WordsTable = () => {
+type WordsTableProps = {
+  hide?: boolean;
+};
+const WordsTable = ({ hide = false }: WordsTableProps) => {
   const dispatch = useAppDispatch();
   const { data, currentPage, total, wordsCount } = useAppSelector((state) => state.words);
   const navigate = useNavigate();
   useEffect(() => {
-    dispatch(fetchWords({ page: currentPage, limit: 10 }));
+    if (hide) {
+      dispatch(fetchWords({ page: currentPage, limit: 10, sortBy: "date" }));
+    } else {
+      dispatch(fetchWords({ page: currentPage, limit: 10, sortBy: "latin" }));
+    }
   }, [currentPage, wordsCount]);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     dispatch(setWordsPage(value));
@@ -36,14 +43,19 @@ const WordsTable = () => {
   return (
     <>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table size={hide ? "small" : "medium"} sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Sóz</TableCell>
-              <TableCell align="left">Сөз</TableCell>
-              <TableCell align="left">Audio</TableCell>
-              <TableCell align="left">Desc__kiril</TableCell>
-              <TableCell align="left">Desc_Latin</TableCell>
+              {!hide && (
+                <>
+                  <TableCell align="left">Сөз</TableCell>
+                  <TableCell align="left">Audio</TableCell>
+                  <TableCell align="left">Desc__kiril</TableCell>
+                  <TableCell align="left">Desc_Latin</TableCell>
+                </>
+              )}
+
               <TableCell align="left">Kategoriya</TableCell>
               <TableCell align="left">Kún</TableCell>
               <TableCell align="left">Actions</TableCell>
@@ -55,20 +67,26 @@ const WordsTable = () => {
                 <TableCell component="th" scope="item">
                   {item.latin}
                 </TableCell>
-                <TableCell align="left">{item.kiril}</TableCell>
-                <TableCell align="left">
-                  <Audio src={item.audio} />
-                </TableCell>
-                <TableCell align="left">{item.description_latin}</TableCell>
-                <TableCell align="left">{item.description_kiril}</TableCell>
+                {!hide && (
+                  <>
+                    <TableCell align="left">{item.kiril}</TableCell>
+                    <TableCell align="left">
+                      <Audio src={item.audio} />
+                    </TableCell>
+                    <TableCell align="left">{item.description_latin}</TableCell>
+                    <TableCell align="left">{item.description_kiril}</TableCell>
+                  </>
+                )}
+
                 <TableCell align="left">{item.categories.length > 0 && item.categories[0].latin}</TableCell>
                 <TableCell align="left">
                   <DateFormat created_at={item.created_at} />
                 </TableCell>
+
                 <TableCell align="left">
                   {
                     <Stack spacing={1} direction={"row"}>
-                      <Button onClick={()=>navigate("/admin/words/"+item.id)} size="small" variant="contained">
+                      <Button onClick={() => navigate("/admin/words/" + item.id)} size="small" variant="contained">
                         Edit
                       </Button>
                       <IconButton onClick={() => onDelete(item.id)} size="small" color="error">

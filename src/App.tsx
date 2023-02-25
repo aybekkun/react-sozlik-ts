@@ -9,6 +9,9 @@ function App() {
   useEffect(() => {
     dispatch(fetchCategories());
   }, []);
+    // useEffect(() => {
+  //   dispatch(userCheck());
+  // }, []);
   return <Routing />;
 }
 
