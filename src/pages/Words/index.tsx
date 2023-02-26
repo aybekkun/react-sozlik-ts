@@ -10,7 +10,6 @@ const Words = () => {
       <div className="container">
         <div className="words">
           <Outlet />
-
           <WordsList />
         </div>
       </div>

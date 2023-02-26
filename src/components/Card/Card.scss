@@ -19,7 +19,6 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 10px;
-   
   }
   &__title {
     font-weight: 600;
@@ -42,6 +41,14 @@
     font-size: 16px;
     line-height: 24px;
     color: #5e96fc;
+  }
+  &__add {
+    color: #5e96fc;
+    a {
+      display: inline-block;
+      text-decoration: underline;
+      margin-right: 2px;
+    }
   }
 }
 

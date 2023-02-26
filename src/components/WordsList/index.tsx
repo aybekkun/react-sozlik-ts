@@ -11,12 +11,14 @@ import Pagination from "../Pagination";
 import Heading from "../UI/Heading";
 import SearchOffIcon from "@mui/icons-material/SearchOff";
 import "./WordsList.scss";
+import { setSelectedWord } from "../../redux/words/slice";
 const WordsList = () => {
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const { id } = useParams();
   const { y } = useAppSelector((state) => state.scroll);
   const { selectedWord } = useAppSelector((state) => state.words);
+  const lang = useAppSelector((state) => state.admin.lang);
   const { wordsList, isWordsListLoading, searchListValue, currentPage, searchLetter, total } = useAppSelector(
     (state) => state.search
   );
@@ -29,6 +31,7 @@ const WordsList = () => {
           limit: 36,
           search: "",
           letter: searchLetter.toLowerCase(),
+          sortBy: "latin",
         })
       );
     } else {
@@ -36,20 +39,13 @@ const WordsList = () => {
         fetchWordsList({
           page: currentPage,
           limit: 36,
-          search: searchListValue,
+          search: selectedWord.latin.slice(0, 3),
           letter: searchLetter.toLowerCase(),
+          sortBy: "latin",
         })
       );
     }
-    dispatch(
-      fetchWordsList({
-        page: currentPage,
-        limit: 36,
-        search: searchListValue,
-        letter: searchLetter.toLowerCase(),
-      })
-    );
-  }, [currentPage, searchListValue, searchLetter, id, pathname]);
+  }, [currentPage, searchListValue, searchLetter, id, pathname, selectedWord.latin]);
 
   const onChangePage = (i: number) => {
     dispatch(setSearchPage(i));
@@ -62,7 +58,7 @@ const WordsList = () => {
 
   const skeleton = (
     <ul className="words__list">
-      {[...Array(36)].map((item, i) => (
+      {[...Array(30)].map((item, i) => (
         <li key={i} className="words__item">
           <Skeleton variant="text" />
         </li>
@@ -76,7 +72,7 @@ const WordsList = () => {
         {wordsList.map((item, i) => (
           <li key={i} className="words__item">
             <Link onClick={() => onClickLink(item.latin)} to={`${WORDS_PAGE}/${item.id}`}>
-              {getLang() ? item.latin : item.kiril}
+              {lang ? item.latin : item.kiril}
             </Link>
           </li>
         ))}
@@ -89,7 +85,11 @@ const WordsList = () => {
 
   return (
     <>
-      <Heading title={pathname === WORDS_PAGE ? "So’zlar ro’yxati" : "O’xshash so’zlar"} />
+      <Heading
+        title={
+          pathname === WORDS_PAGE ? (lang ? "Sózler dizimi" : "Сөзлер дизими") : lang ? "Uqsas sózler" : "Уқсас сөзлер"
+        }
+      />
       {isWordsListLoading && wordsList.length < 1 ? skeleton : wordsListElement}
       <Pagination currentPage={currentPage} total={Math.ceil(total / 36)} onChangePage={onChangePage} />
     </>

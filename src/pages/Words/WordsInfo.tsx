@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Card from "../../components/Card";
-import { getLang } from "../../helpers/convertor/convertor";
 import useAppDispatch from "../../hooks/useAppDispatch.hook";
 import useAppSelector from "../../hooks/useAppSelector.hook";
 import { fetchSingleWord } from "../../redux/words/asyncActions";
@@ -9,7 +8,8 @@ import { fetchSingleWord } from "../../redux/words/asyncActions";
 const WordsInfo = () => {
   const dispatch = useAppDispatch();
   const { categories } = useAppSelector((state) => state.search);
-  const { isWordLoading, selectedWord } = useAppSelector((state) => state.words);
+  const { selectedWord } = useAppSelector((state) => state.words);
+  const lang = useAppSelector((state) => state.admin.lang);
   const { id } = useParams();
   useEffect(() => {
     if (id) {
@@ -23,15 +23,17 @@ const WordsInfo = () => {
         <ul className="categories">
           {categories.map((item, i) => (
             <li key={i} className={`categories__item ${item.id === selectedWord.categories[0].id ? "active" : ""}`}>
-              {getLang() ? item.latin : item.kiril}
+              {lang? item.latin : item.kiril}
             </li>
           ))}
         </ul>
       )}
       <Card
-        title={getLang() ? selectedWord.latin : selectedWord.kiril}
-        description={getLang() ? selectedWord.description_latin : selectedWord.description_kiril}
+        title={lang? selectedWord.latin : selectedWord.kiril}
+        description={lang ? selectedWord.description_latin : selectedWord.description_kiril}
         audio={selectedWord.audio}
+        synonyms={selectedWord.synonyms}
+        antonyms={selectedWord.antonyms}
       />
     </div>
   );

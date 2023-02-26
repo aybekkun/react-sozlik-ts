@@ -3,6 +3,7 @@ import { Dayjs } from "dayjs";
 export interface IAdminState {
     categories:ICategoryByDateData[];
     categoriesCount:number;
+    lang:boolean;
 }
 
 export interface ICategoryByDate {

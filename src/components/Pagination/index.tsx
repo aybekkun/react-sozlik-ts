@@ -12,7 +12,9 @@ const Pagination = ({ total, currentPage, onChangePage }: PaginationProps) => {
     console.log(e.selected);
     onChangePage(e.selected + 1);
   };
-
+  if (total < 2) {
+    return <></>;
+  }
   return (
     <ReactPaginate
       className="pagination"

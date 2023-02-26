@@ -56,9 +56,18 @@
   &__list {
     display: flex;
     gap: 40px;
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+    }
     a {
       color: #fff;
     }
+  }
+  .translate{
+    color: #fff;
   }
   .icon {
     display: none;

@@ -15,6 +15,7 @@ import "./Search.scss";
 const Search = () => {
   const dispatch = useAppDispatch();
   const { y } = useAppSelector((state) => state.scroll);
+  const lang = useAppSelector((state) => state.admin.lang);
   const { searchValue, data } = useAppSelector((state) => state.search);
   const debouncedValue = useDebounce<string>(searchValue, 300);
   const navigate = useNavigate();
@@ -36,9 +37,9 @@ const Search = () => {
     onClearValue();
   };
   const onClickEnter = (e: React.KeyboardEvent) => {
-    if (e.code === "Enter"&&data.length > 0) {
+    if (e.code === "Enter" && data.length > 0) {
       onClickLink(data[0].latin);
-      navigate(`${WORDS_PAGE}/${data[0].id}`)
+      navigate(`${WORDS_PAGE}/${data[0].id}`);
     }
   };
 
@@ -47,7 +48,9 @@ const Search = () => {
       <div className="search">
         <div className="container">
           <div className="search__inner">
-            <h1 className="search__title">Bir so’zni qidiring, uni abadiy o’rganing.</h1>
+            <h1 className="search__title">
+              {lang ? "Bir sózdi qıdırıń, onı ádebiy úyreniń." : "Бир сөзди қыдырың, оны әдебий үйрениң."}
+            </h1>
             <div className="search__input-box">
               <div className="search__wrap">
                 <input
@@ -56,7 +59,7 @@ const Search = () => {
                   onChange={onChangeInput}
                   className="search__input"
                   type="text"
-                  placeholder="so’zni qidirish uchun yozing..."
+                  placeholder={lang ? "sózdi qıdırıw ushın jazıń..." : "cөзди қыдырыў ушын жазың..."}
                 />
                 {searchValue.length > 0 ? (
                   <button onClick={onClearValue} className="search__btn">

@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import Card from "../../components/Card";
 import Wrapper from "../../components/UI/Wrapper";
-import { getLang } from "../../helpers/convertor/convertor";
 import useAppDispatch from "../../hooks/useAppDispatch.hook";
 import useAppSelector from "../../hooks/useAppSelector.hook";
 import { fetchWordsDay } from "../../redux/words/asyncActions";
@@ -10,6 +9,8 @@ import HomeInfo from "./HomeInfo";
 const Home = () => {
   const dispatch = useAppDispatch();
   const { wordsDay } = useAppSelector((state) => state.words);
+  const lang = useAppSelector((state) => state.admin.lang);
+
   useEffect(() => {
     dispatch(fetchWordsDay({}));
   }, []);
@@ -19,17 +20,20 @@ const Home = () => {
         <div className="container">
           <div className="home__top">
             <HomeInfo
-              title="O’rganish uchun lug’at"
-              subtitle="O’rganish uchun lug’at"
-              description="Muayyan so'zni qidiryapsizmi yoki shunchaki ko'rib chiqyapsizmi, siz o'qitish va ko'ngil ochish uchun mo'ljallangan do'stona tushuntirishlar va qiziqarli tadbirlar olamini topasiz."
+              title={lang ? "Úyreniw ushın sózlik" : "Үйрениў ушын сөзлик"}
+              subtitle={lang ? "Úyreniw ushın sózlik" : "Үйрениў ушын сөзлик"}
+              description={
+                lang
+                  ? "Arnawlı bir sózdi qıdıryapsizmi yamasa jaysha kórip chiqyapsizmi, siz oqıtıw hám ko'ngil ashıw ushın mólsherlengen dos sıpatında túsindirisler hám qızıqlı ilajlar álemin tabası"
+                  : "Арнаўлы бир сөзди қыдыряпсизми ямаса жайша көрип чиқяпсизми, сиз оқытыў ҳәм коънгил ашыў ушын мөлшерленген дос сыпатында түсиндирислер ҳәм қызықлы илажлар әлемин табасы"
+              }
             />
             <Card
               id={wordsDay.id}
               type="popular"
-              
-              description={getLang() ? wordsDay.description_latin : wordsDay.kiril}
+              description={lang ? wordsDay.description_latin : wordsDay.description_kiril}
               audio={wordsDay.audio}
-              title={getLang() ? wordsDay.latin : wordsDay.kiril}
+              title={lang ? wordsDay.latin : wordsDay.kiril}
             />
           </div>
           <div className="home__bottom">
@@ -45,8 +49,8 @@ const Home = () => {
               ></iframe>
             </div>
             <HomeInfo
-              title="So’zlarni o’rganishning eng samarali usuli"
-              subtitle="eng samarali usuli"
+              title={lang ? "Sózlerdi úyreniwdiń eń nátiyjeli usılı" : "Сөзлерди үйрениўдиң ең нәтийжели усылы"}
+              subtitle={lang ? "Eń nátiyjeli usılı" : "Eң нәтийжели усылы"}
               description="Muayyan so'zni qidiryapsizmi yoki shunchaki ko'rib chiqyapsizmi, siz o'qitish va ko'ngil ochish uchun mo'ljallangan do'stona tushuntirishlar va qiziqarli tadbirlar olamini topasiz."
             />
           </div>

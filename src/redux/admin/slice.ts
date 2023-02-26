@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { getLang } from "../../helpers/convertor/convertor";
 import { fetchCategoriesByDate } from "./asyncActions";
 import { IAdminState, ICategoryByDate } from "./types";
 
 const initialState: IAdminState = {
   categories: [],
   categoriesCount: 0,
+  lang: false,
 };
 
 export const adminSlice = createSlice({
@@ -13,6 +15,15 @@ export const adminSlice = createSlice({
   reducers: {
     setCategoriesCount(state) {
       state.categoriesCount++;
+    },
+    setLang(state) {
+      if (getLang()) {
+        window.localStorage.setItem("lang", "kiril");
+        state.lang = false;
+      } else {
+        window.localStorage.setItem("lang", "latin");
+        state.lang = true;
+      }
     },
   },
   extraReducers: (builder) => {
@@ -27,6 +38,6 @@ export const adminSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
- export const { setCategoriesCount } = adminSlice.actions;
+export const { setCategoriesCount, setLang } = adminSlice.actions;
 
 export default adminSlice.reducer;

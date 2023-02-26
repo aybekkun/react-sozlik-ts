@@ -9,18 +9,23 @@ import "./Header.scss";
 import useAppSelector from "../../hooks/useAppSelector.hook";
 import useAppDispatch from "../../hooks/useAppDispatch.hook";
 import { setSearchListValue } from "../../redux/search/slice";
-
+import TranslateIcon from "@mui/icons-material/Translate";
+import { IconButton } from "@mui/material";
+import { getLang } from "../../helpers/convertor/convertor";
+import { setLang } from "../../redux/admin/slice";
 const Header = () => {
   const dispatch = useAppDispatch();
   const { y } = useAppSelector((state) => state.scroll);
+  const lang = useAppSelector((state) => state.admin.lang);
 
   const onClickLink = () => {
     window.scrollTo(0, y);
-    dispatch(setSearchListValue(""))
+    dispatch(setSearchListValue(""));
   };
-  const onClickHome = ()=>{
-    window.scrollTo(0,0);
-  }
+  const onClickHome = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <header className="header">
       <div className="container">
@@ -31,20 +36,25 @@ const Header = () => {
               <li>
                 <Link onClick={onClickHome} to={"/"}>
                   <HomeOutlinedIcon className="icon" />
-                  <span>So’zlar</span>
+                  <span>{lang ? "Sózler" : "Сөзлер"}</span>
                 </Link>
               </li>
               <li>
                 <Link onClick={onClickLink} to={WORDS_PAGE}>
                   <FormatListBulletedIcon className="icon" />
-                  <span>So’zlar ro’yxati</span>
+                  <span>{lang ? "Sózler dizimi" : "Сөзлер дизими"}</span>
                 </Link>
               </li>
               <li>
                 <Link onClick={onClickLink} to={ABOUT_PAGE}>
                   <InfoOutlinedIcon className="icon" />
-                  <span>Dastur haqida</span>
+                  <span>{lang ? "Programma haqqında" : "Программа ҳаққында"}</span>
                 </Link>
+              </li>
+              <li>
+                <IconButton onClick={() => dispatch(setLang())}>
+                  <TranslateIcon className="translate" />
+                </IconButton>
               </li>
             </ul>
           </div>
@@ -54,8 +64,12 @@ const Header = () => {
       <div className="header__buttons">
         <div className="container">
           <div className="header__buttons-inner">
-            <button className="header__btn header__btn-1">O’rganish uchun lug’at</button>
-            <button className="header__btn header__btn-2">So’zlarni o’rganishning eng samarali usuli</button>
+            <button className="header__btn header__btn-1">
+              {lang ? "Úyreniw ushın sózlik" : "Үйрениў ушын сөзлик"}
+            </button>
+            <button className="header__btn header__btn-2">
+              {lang ? "Sózlerdi úyreniwdiń eń nátiyjeli usılı " : "Сөзлерди үйрениўдиң ең нәтийжели усылы"}
+            </button>
           </div>
         </div>
       </div>

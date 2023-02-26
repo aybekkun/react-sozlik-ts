@@ -6,17 +6,32 @@ import "./Card.scss";
 import { Skeleton } from "@mui/material";
 import StopIcon from "@mui/icons-material/Stop";
 import { _audioRoute } from "../../api/audioroute";
+import useAppSelector from "../../hooks/useAppSelector.hook";
+import { Link } from "react-router-dom";
+import useAppDispatch from "../../hooks/useAppDispatch.hook";
+import { setSearchListValue } from "../../redux/search/slice";
+
+type AddData = {
+  id: number;
+  latin: string;
+  kiril: string;
+};
 
 type CardProps = {
   id?: number;
   description?: string;
   audio?: string | null;
   title?: string;
+  synonyms?: AddData[];
+  antonyms?: AddData[];
   type?: "popular";
 };
-const Card = ({ type, id, description, audio, title }: CardProps) => {
+const Card = ({ type, id, description, audio, title, synonyms, antonyms }: CardProps) => {
+  const dispatch = useAppDispatch();
   const audioRef = useRef<HTMLAudioElement>(null);
   const [play, setPlay] = useState(false);
+  const lang = useAppSelector((state) => state.admin.lang);
+  const { y } = useAppSelector((state) => state.scroll);
   const onClickPlay = () => {
     if (audioRef.current) {
       audioRef.current.play();
@@ -49,10 +64,14 @@ const Card = ({ type, id, description, audio, title }: CardProps) => {
       <VolumeUpIcon />
     </button>
   );
+  const onClickLink = (str: string) => {
+    window.scrollTo(0, y);
+    dispatch(setSearchListValue(str.slice(0, 3)));
+  };
   return (
     <div className="card">
       <div className="card__top">
-        <Heading2 title={type ? "Kun so’zi" : "Sóz mánisi"} />
+        <Heading2 title={type ? (lang ? "Kun sózi" : "Кун сөзи") : lang ? "Sóz mánisi" : "Сөз мәниси"} />
         <button onClick={onClickShare} className="share">
           <ShareIcon /> Share
         </button>
@@ -62,10 +81,34 @@ const Card = ({ type, id, description, audio, title }: CardProps) => {
         {audio && audioButtons}
       </div>
       <p className="card__desc">{description ? description : <Skeleton width={"100%"} height={"3rem"} />}</p>
+      <div className="card__add">
+        {synonyms && synonyms.length > 0 && (
+          <>
+            <b>Sinonim</b> :
+            {synonyms.map((item) => (
+              <Link key={item.id} onClick={() => onClickLink(item.latin)} to={`/words/${item.id}`}>
+                {lang ? item.latin : item.kiril}
+              </Link>
+            ))}
+          </>
+        )}
+      </div>
+      <div className="card__add">
+        {antonyms && antonyms.length > 0 && (
+          <>
+            <b>Antonim</b> :
+            {antonyms.map((item) => (
+              <Link key={item.id}  onClick={() => onClickLink(item.latin)} to={`/words/${item.id}`}>
+                {lang ? item.latin : item.kiril}
+              </Link>
+            ))}
+          </>
+        )}
+      </div>
       {audio && (
         <audio controls ref={audioRef} style={{ display: "none" }}>
           <source src={`${_audioRoute}/${audio}`} type="audio/mp3" />
-          <source src={`${_audioRoute}/${audio}`}type="audio/ogg" />
+          <source src={`${_audioRoute}/${audio}`} type="audio/ogg" />
           <source src={`${_audioRoute}/${audio}`} type="audio/wav" />
         </audio>
       )}

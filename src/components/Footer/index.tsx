@@ -5,14 +5,21 @@ import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import { Link } from "react-router-dom";
 import "./Footer.scss";
+import { WORDS_PAGE } from "../../helpers/constants/route";
+import useAppSelector from "../../hooks/useAppSelector.hook";
 const Footer = () => {
+  const { y } = useAppSelector((state) => state.scroll);
+  const lang = useAppSelector((state) => state.admin.lang);
+  const onScroll = () => {
+    window.scrollTo(0, y);
+  };
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer__top">
           <div className="footer__left">
             <Logo classname="logo" />
-            <p>Ijtimoiy tarmoqlar:</p>
+            <p>{lang ? "Social tarmaqlar :" : "Социал тармақлар :"}</p>
             <ul className="social">
               <li>
                 <a href="#" target="_blank" rel="noreferrer">
@@ -32,8 +39,8 @@ const Footer = () => {
             </ul>
           </div>
           <div className="footer__right">
-            <ul className="footer__list">
-              <h3 className="footer__title">So’zlar</h3>
+            {/*       <ul className="footer__list">
+              <h3 className="footer__title">{lang?"Sózler":"Cөзлер"}</h3>
               <li className="footer__item">
                 <Link to="/">Kun so’zi</Link>
               </li>
@@ -46,20 +53,17 @@ const Footer = () => {
               <li className="footer__item">
                 <Link to="/">So’zlar ro’yxati</Link>
               </li>
-            </ul>
+            </ul> */}
             <ul className="footer__list">
-              <h3 className="footer__title">Dastur haqida</h3>
+              <h3 className="footer__title">{lang ? "Programma haqqında" : "Программа ҳаққында"}</h3>
               <li className="footer__item">
-                <Link to="/">Kun so’zi</Link>
+                <Link onClick={onScroll} to="/">{lang ? "Kun sózi" : "Кун сөзи"}</Link>
               </li>
               <li className="footer__item">
-                <Link to="/">Yil so’zi </Link>
+                <Link onClick={onScroll} to="/words?new">{lang ? "Jańa sózler" : "Жаңа сөзлер"}</Link>
               </li>
               <li className="footer__item">
-                <Link to="/">Yangi so’zlar</Link>
-              </li>
-              <li className="footer__item">
-                <Link to="/">So’zlar ro’yxati</Link>
+                <Link onClick={onScroll} to={WORDS_PAGE}>{lang ? "Sózler dizimi" : "Сөзлер дизими"}</Link>
               </li>
             </ul>
           </div>
