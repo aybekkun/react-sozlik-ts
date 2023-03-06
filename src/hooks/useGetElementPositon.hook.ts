@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import React from "react";
 
 const useGetElementPositon = <T = unknown>() => {
   const positionRef = useRef<T>(null);

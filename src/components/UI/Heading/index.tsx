@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps } from "react";
+import React from "react";
 import "./Heading.scss";
 interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   title?: string;

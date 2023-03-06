@@ -7,6 +7,7 @@ export interface IWordsState extends IWords {
   wordsDay : IWordData;
   isWordLoading: boolean;
   wordsCount: number;
+  
 }
 
 export interface IWords {

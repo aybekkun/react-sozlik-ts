@@ -55,6 +55,10 @@ const Card = ({ type, id, description, audio, title, synonyms, antonyms }: CardP
     await navigator.share(shareData);
   };
 
+  const onClickLink = (str: string) => {
+    window.scrollTo(0, y);
+    dispatch(setSearchListValue(str.slice(0, 3)));
+  };
   const audioButtons = play ? (
     <button onClick={onClickPause} className="card__volume">
       <StopIcon />
@@ -64,10 +68,6 @@ const Card = ({ type, id, description, audio, title, synonyms, antonyms }: CardP
       <VolumeUpIcon />
     </button>
   );
-  const onClickLink = (str: string) => {
-    window.scrollTo(0, y);
-    dispatch(setSearchListValue(str.slice(0, 3)));
-  };
   return (
     <div className="card">
       <div className="card__top">

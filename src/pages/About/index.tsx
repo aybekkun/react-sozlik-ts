@@ -1,6 +1,3 @@
-import React from "react";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 import Heading from "../../components/UI/Heading";
 import "./About.scss";
 const About = () => {

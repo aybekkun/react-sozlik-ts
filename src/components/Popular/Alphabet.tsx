@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { WORDS_PAGE } from "../../helpers/constants/route";
 import useAppDispatch from "../../hooks/useAppDispatch.hook";
 import useAppSelector from "../../hooks/useAppSelector.hook";
-import { setSearchLetter, setSearchListValue } from "../../redux/search/slice";
+import { setSearchLetter } from "../../redux/search/slice";
 const alphabet = [
   "A",
   "Á",

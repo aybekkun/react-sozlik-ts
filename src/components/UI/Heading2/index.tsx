@@ -1,4 +1,3 @@
-import React, { DetailedHTMLProps } from "react";
 import "./Heading2.scss";
 type Heading2Props = {
   props?: any;

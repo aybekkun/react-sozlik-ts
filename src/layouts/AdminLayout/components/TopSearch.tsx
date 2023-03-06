@@ -1,14 +1,12 @@
-import React, { useEffect } from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import { Link } from "react-router-dom";
-import useAppSelector from "../../../hooks/useAppSelector.hook";
-import useAppDispatch from "../../../hooks/useAppDispatch.hook";
-import { fetchWords } from "../../../redux/words/asyncActions";
-import useDebounce from "../../../hooks/useDebounce.hook";
-import { setSearchValue, setTopSearchValue } from "../../../redux/search/slice";
-import { fetchTopSearchWord } from "../../../redux/search/asyncActions";
 import CloseIcon from "@mui/icons-material/Close";
-import { translit } from "../../../helpers/convertor/convertor";
+import SearchIcon from "@mui/icons-material/Search";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import useAppDispatch from "../../../hooks/useAppDispatch.hook";
+import useAppSelector from "../../../hooks/useAppSelector.hook";
+import useDebounce from "../../../hooks/useDebounce.hook";
+import { fetchTopSearchWord } from "../../../redux/search/asyncActions";
+import { setTopSearchValue } from "../../../redux/search/slice";
 const TopSearch = () => {
   const dispatch = useAppDispatch();
   const { topSearchValue, topSearch } = useAppSelector((state) => state.search);

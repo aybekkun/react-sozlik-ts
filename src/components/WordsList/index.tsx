@@ -1,17 +1,15 @@
+import SearchOffIcon from "@mui/icons-material/SearchOff";
 import { IconButton, Skeleton } from "@mui/material";
 import { useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { WORDS_PAGE } from "../../helpers/constants/route";
-import { getLang } from "../../helpers/convertor/convertor";
 import useAppDispatch from "../../hooks/useAppDispatch.hook";
 import useAppSelector from "../../hooks/useAppSelector.hook";
 import { fetchWordsList } from "../../redux/search/asyncActions";
 import { setSearchLetter, setSearchListValue, setSearchPage } from "../../redux/search/slice";
 import Pagination from "../Pagination";
 import Heading from "../UI/Heading";
-import SearchOffIcon from "@mui/icons-material/SearchOff";
 import "./WordsList.scss";
-import { setSelectedWord } from "../../redux/words/slice";
 const WordsList = () => {
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();

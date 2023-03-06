@@ -30,7 +30,7 @@ const Login = () => {
     <div className="login">
       <form onSubmit={handleSubmit} className="login__form">
         <div className="container">
-          <input value={phone} name="phone" onChange={handleInputChange} type="tel" placeholder="Login" />
+          <input value={phone} name="phone" onChange={handleInputChange} type="tel" placeholder="Login" required/>
           <input
             value={password}
             name="password"

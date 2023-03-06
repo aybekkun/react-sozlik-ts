@@ -1,18 +1,17 @@
-import { Link } from "react-router-dom";
-import { ABOUT_PAGE, WORDS_PAGE } from "../../helpers/constants/route";
-import Search from "../Search";
-import Logo from "../UI/Logo";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import "./Header.scss";
-import useAppSelector from "../../hooks/useAppSelector.hook";
-import useAppDispatch from "../../hooks/useAppDispatch.hook";
-import { setSearchListValue } from "../../redux/search/slice";
 import TranslateIcon from "@mui/icons-material/Translate";
 import { IconButton } from "@mui/material";
-import { getLang } from "../../helpers/convertor/convertor";
+import { Link } from "react-router-dom";
+import { ABOUT_PAGE, WORDS_PAGE } from "../../helpers/constants/route";
+import useAppDispatch from "../../hooks/useAppDispatch.hook";
+import useAppSelector from "../../hooks/useAppSelector.hook";
 import { setLang } from "../../redux/admin/slice";
+import { setSearchListValue } from "../../redux/search/slice";
+import Search from "../Search";
+import Logo from "../UI/Logo";
+import "./Header.scss";
 const Header = () => {
   const dispatch = useAppDispatch();
   const { y } = useAppSelector((state) => state.scroll);
