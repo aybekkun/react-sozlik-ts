@@ -26,11 +26,8 @@ const Antonyms = ({ ids, onAdd, data = [] }: AntonymsProps) => {
   }, [ids]);
 
   useEffect(() => {
-    setAntonyms(data);
-  }, [data]);
-  useEffect(() => {
     if (debouncedValue) {
-      dispatch(fetchPopularList({ page: 1, limit: 100, search: debouncedValue }));
+      dispatch(fetchPopularList({ page: 1, limit: 10, search: debouncedValue }));
     }
   }, [debouncedValue]);
   const onAddAntonyms = (selectedWord: ISearchData) => {

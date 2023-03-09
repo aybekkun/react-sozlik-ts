@@ -11,7 +11,9 @@ import { updateWord } from "../../redux/admin/asyncActions";
 import { fetchCategories } from "../../redux/search/asyncActions";
 import { fetchSingleWord } from "../../redux/words/asyncActions";
 import Antonyms from "./components/Form/Antonyms";
+import AntonymsEdit from "./components/Form/AntonymsEdit";
 import Synonyms from "./components/Form/Synonyms";
+import SynonymsEdit from "./components/Form/SynonymsEdit";
 type FormType = {
   latin: string;
   kiril: string;
@@ -148,8 +150,8 @@ const AdminEditWord = () => {
               </Button>
             </Stack>
             <Stack flex={1} spacing={2}>
-              <Synonyms data={selectedWord.synonyms} ids={synIds} onAdd={(arr) => setSynIds(arr)} />
-              <Antonyms data={selectedWord.antonyms} ids={antIds} onAdd={(arr) => setAntIds(arr)} />
+              <SynonymsEdit data={selectedWord.synonyms} ids={synIds} onAdd={(arr) => setSynIds(arr)} />
+              <AntonymsEdit data={selectedWord.antonyms} ids={antIds} onAdd={(arr) => setAntIds(arr)} />
             </Stack>
           </div>
           <Stack sx={{ marginTop: "20px" }} direction={"row"} spacing={2}>

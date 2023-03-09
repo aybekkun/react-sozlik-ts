@@ -13,7 +13,7 @@ type SynonymsProps = {
   ids: number[];
   onAdd: (arr: number[]) => void;
 };
-const Synonyms = ({ ids, onAdd, data = [] }: SynonymsProps) => {
+const SynonymsEdit = ({ ids, onAdd, data = [] }: SynonymsProps) => {
   const dispatch = useAppDispatch();
   const { wordsList, searchListValue } = useAppSelector((state) => state.search);
   const [synonyms, setSynonyms] = useState<ISearchData[]>([]);
@@ -26,6 +26,12 @@ const Synonyms = ({ ids, onAdd, data = [] }: SynonymsProps) => {
     }
   }, [ids]);
   
+	useEffect(() => {
+		if (data.length > 0) {
+			setSynonyms(data);
+		}
+	}, [data]);
+
   useEffect(() => {
     if (debouncedValue) {
       dispatch(fetchWordsList({ page: 1, limit:10 , search: debouncedValue }));
@@ -92,4 +98,4 @@ const Synonyms = ({ ids, onAdd, data = [] }: SynonymsProps) => {
   );
 };
 
-export default Synonyms;
+export default SynonymsEdit;

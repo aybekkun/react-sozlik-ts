@@ -47,7 +47,7 @@ const Header = () => {
               <li>
                 <Link onClick={onClickLink} to={ABOUT_PAGE}>
                   <InfoOutlinedIcon className="icon" />
-                  <span>{lang ? "Programma haqqında" : "Программа ҳаққында"}</span>
+                  <span>{lang ? "Baǵdarlama haqqında" : "Бағдарлама ҳаққында"}</span>
                 </Link>
               </li>
               <li>

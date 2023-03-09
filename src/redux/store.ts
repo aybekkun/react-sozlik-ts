@@ -20,7 +20,7 @@ const store = configureStore({
     scroll,
     admin,
   },
-  devTools: false,
+  devTools: true,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
