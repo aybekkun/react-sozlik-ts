@@ -14,6 +14,7 @@
   &__buttons-inner {
     display: flex;
     gap: 20px;
+    justify-content: center;
   }
   &__btn {
     cursor: pointer;
@@ -72,6 +73,10 @@
   .icon {
     display: none;
   }
+  .language{
+    border: 1px solid #fff;
+    padding: 3px;
+  }
 }
 
 @media only screen and (max-width: 450px) {
@@ -93,6 +98,9 @@
       justify-content: space-evenly;
       span {
         display: none;
+      }
+      .language{
+        display: block;
       }
       a {
         display: block;

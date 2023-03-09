@@ -99,7 +99,7 @@ export function translit(word: string) {
     ш: "sh",
     щ: "sh",
     ъ: "",
-    ы: "í",
+    ы: "ı",
     ь: "",
     э: "e",
     ю: "yu",
