@@ -51,7 +51,12 @@ const Home = () => {
 						<HomeInfo
 							title={lang ? "Sózlerdi úyreniwdiń eń nátiyjeli usılı" : "Сөзлерди үйрениўдиң ең нәтийжели усылы"}
 							subtitle={lang ? "Eń nátiyjeli usılı" : "Eң нәтийжели усылы"}
-							description="Muayyan so'zni qidiryapsizmi yoki shunchaki ko'rib chiqyapsizmi, siz o'qitish va ko'ngil ochish uchun mo'ljallangan do'stona tushuntirishlar va qiziqarli tadbirlar olamini topasiz."
+							description={
+								lang
+									? `Sózlerdi úyreniwdiń eń nátiyjeli usılı - tek ǵana biz benen! Tusindirmesozlik.uz - Qaraqalpaq tilindegi sózlerdi durıs jazıw hám onıń mánisin mısallar járdeminde sizge shaǵıp beriwge járdem beredi! Video arqalı veb sayttıń islew funkciyası hám kreativligin tolıǵıraq túsinip alasız. Tómendegi "tolıq" túymesin basıń.`
+									: `
+Сөзлерди үйрениўдиң ең нәтийжели усылы - тек ғана биз бенен! Тусиндирмесозлик.уз - Қарақалпақ тилиндеги сөзлерди дурыс жазыў ҳәм оның мәнисин мысаллар жәрдеминде сизге шағып бериўге жәрдем береди! Видео арқалы веб сайттың ислеў ўаункциясы ҳәм креативлигин толығырақ түсинип аласыз. Төмендеги "толық" түймесин басың.`
+							}
 						/>
 					</div>
 				</div>

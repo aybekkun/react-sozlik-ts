@@ -49,7 +49,7 @@ const Search = () => {
         <div className="container">
           <div className="search__inner">
             <h1 className="search__title">
-              {lang ? "Bir sózdi qıdırıń, onı ádebiy úyreniń." : "Бир сөзди қыдырың, оны әдебий үйрениң."}
+              {lang ? "Bir sózdi izleń, onı úyreniń" : "Бир сөзди излең, оны үйрениң"}
             </h1>
             <div className="search__input-box">
               <div className="search__wrap">
@@ -59,7 +59,7 @@ const Search = () => {
                   onChange={onChangeInput}
                   className="search__input"
                   type="text"
-                  placeholder={lang ? "sózdi qıdırıw ushın jazıń..." : "cөзди қыдырыў ушын жазың..."}
+                  placeholder={lang ? "sózdi izlew ushın jazıń..." : "сөзди излеў ушын жазың..."}
                 />
                 {searchValue.length > 0 ? (
                   <button onClick={onClearValue} className="search__btn">

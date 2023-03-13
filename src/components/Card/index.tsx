@@ -74,7 +74,7 @@ const Card = ({ type, id, description, audio, title, synonyms, antonyms, categor
 		<>
 			<div className="card">
 				<div className="card__top">
-					<Heading2 title={type ? (lang ? "Kun sózi" : "Кун сөзи") : lang ? "Sóz mánisi" : "Сөз мәниси"} />
+					<Heading2 title={type ? (lang ? "Kún sózi" : "Күн сөзи") : lang ? "Sóz mánisi" : "Сөз мәниси"} />
 					<button onClick={onClickShare} className="share">
 						<ShareIcon /> Share
 					</button>

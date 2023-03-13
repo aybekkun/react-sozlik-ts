@@ -37,8 +37,8 @@ const PopularSearch = () => {
   ));
   return (
     <div className="popular__search">
-      <Heading title={lang ? "Kópshilikke arnalǵan qıdırıwlar" : "Көпшиликке арналған қыдырыўлар"} />
-      <p className="popular__subtitle">{lang ? "Qaraqalpaq tili sózligi" : "Қарақалпақ тили сөзлиги"}</p>
+      <Heading title={lang ? "Kópshilikke arnalǵan izlewler" : "Көпшиликке арналған излеўлер"} />
+      <p className="popular__subtitle">{lang ? "Qaraqalpaq tiliniń túsindirme sózligi" : "Қарақалпақ тилиниң түсиндирме сөзлиги"}</p>
       <ul className="popular__list">{isPopularListLoading ? skeleton : popularWordsLits}</ul>
     </div>
   );

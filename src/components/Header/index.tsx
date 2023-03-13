@@ -2,7 +2,7 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ABOUT_PAGE, WORDS_PAGE } from "../../helpers/constants/route";
 import useAppDispatch from "../../hooks/useAppDispatch.hook";
 import useAppSelector from "../../hooks/useAppSelector.hook";
@@ -12,11 +12,15 @@ import ShopIcon from "@mui/icons-material/Shop";
 import AppleIcon from "@mui/icons-material/Apple";
 import Search from "../Search";
 import Logo from "../UI/Logo";
+import cn from "classnames";
+
 import "./Header.scss";
 const Header = () => {
 	const dispatch = useAppDispatch();
 	const { y } = useAppSelector((state) => state.scroll);
 	const lang = useAppSelector((state) => state.admin.lang);
+	const { pathname } = useLocation();
+	const currentLocation = pathname.split("/")[1];
 
 	const onClickLink = () => {
 		window.scrollTo(0, y);
@@ -34,19 +38,19 @@ const Header = () => {
 						<Logo />
 						<ul className="nav__list">
 							<li>
-								<Link onClick={onClickHome} to={"/"}>
+								<Link className={cn({ active: currentLocation === "" })} onClick={onClickHome} to={"/"}>
 									<HomeOutlinedIcon className="icon" />
 									<span>{lang ? "Sózler" : "Сөзлер"}</span>
 								</Link>
 							</li>
 							<li>
-								<Link onClick={onClickLink} to={WORDS_PAGE}>
+								<Link className={cn({ active: currentLocation === "words" })} onClick={onClickLink} to={WORDS_PAGE}>
 									<FormatListBulletedIcon className="icon" />
 									<span>{lang ? "Sózler dizimi" : "Сөзлер дизими"}</span>
 								</Link>
 							</li>
 							<li>
-								<Link onClick={onClickLink} to={ABOUT_PAGE}>
+								<Link className={cn({ active: currentLocation === "about" })} onClick={onClickLink} to={ABOUT_PAGE}>
 									<InfoOutlinedIcon className="icon" />
 									<span>{lang ? "Baǵdarlama haqqında" : "Бағдарлама ҳаққында"}</span>
 								</Link>
@@ -68,11 +72,10 @@ const Header = () => {
 			<div className="header__buttons">
 				<div className="container">
 					<div className="header__buttons-inner">
-            
-						<Button sx={{bgcolor:"#0058fb60"}} variant="contained" startIcon={<ShopIcon />}>
+						<Button sx={{ bgcolor: "#0058fb60" }} variant="contained" startIcon={<ShopIcon />}>
 							Google
 						</Button>
-						<Button sx={{bgcolor:"#0058fb60"}} variant="contained" startIcon={<AppleIcon />}>
+						<Button sx={{ bgcolor: "#0058fb60" }} variant="contained" startIcon={<AppleIcon />}>
 							App Store
 						</Button>
 					</div>

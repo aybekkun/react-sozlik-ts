@@ -1,128 +1,130 @@
 .header {
-  background-color: #0039a4;
-  .container {
-    overflow: hidden;
-  }
-  &__buttons {
-    margin-top: -200px;
-    padding: 73px 0 30px;
-    background-image: url("../../assets//img//wave.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top center;
-  }
-  &__buttons-inner {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-  }
-  &__btn {
-    cursor: pointer;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #ffffff;
-    border-radius: 8px;
-    flex-basis: 370px;
-    height: 60px;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 22px;
-    transition: all 0.2s ease-in-out;
-    &:active {
-      transform: scale(0.9);
-    }
-  }
-  &__btn-1 {
-    color: #0059fb;
-  }
-  &__btn-2 {
-    color: #00a886;
-  }
+	background-color: #0039a4;
+	.container {
+		overflow: hidden;
+	}
+	&__buttons {
+		margin-top: -200px;
+		padding: 73px 0 30px;
+		background-image: url("../../assets//img//wave.svg");
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: top center;
+	}
+	&__buttons-inner {
+		display: flex;
+		gap: 20px;
+		justify-content: center;
+	}
+	&__btn {
+		cursor: pointer;
+		border: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: #ffffff;
+		border-radius: 8px;
+		flex-basis: 370px;
+		height: 60px;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 22px;
+		transition: all 0.2s ease-in-out;
+		&:active {
+			transform: scale(0.9);
+		}
+	}
+	&__btn-1 {
+		color: #0059fb;
+	}
+	&__btn-2 {
+		color: #00a886;
+	}
 }
 
 .nav {
-  position: fixed;
-  left: 0;
-  right: 0;
-  background-color: #0039a4;
-  z-index: 99;
-  .container {
-    padding: 8px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  &__list {
-    display: flex;
-    gap: 40px;
-    li {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-    }
-    a {
-      color: #fff;
-    }
-  }
-  .translate{
-    color: #fff;
-  }
-  .icon {
-    display: none;
-  }
-  .language{
-    border: 1px solid #fff;
-    padding: 3px;
-  }
+	position: fixed;
+	left: 0;
+	right: 0;
+	background-color: #0039a4;
+	z-index: 99;
+	.container {
+		padding: 8px 20px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	&__list {
+		display: flex;
+		gap: 40px;
+		li {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		a {
+			color: #fff;
+			&.active {
+				color: #b2c3e4;
+			}
+		}
+	}
+	.translate {
+		color: #fff;
+	}
+	.icon {
+		display: none;
+	}
+	.language {
+		border: 1px solid #fff;
+		padding: 3px;
+	}
 }
 
-@media only screen and (max-width: 450px) {
-  .nav {
-    bottom: 0;
-    .container {
-      justify-content: center;
-    }
-    .logo {
-      display: none;
-    }
-    .icon {
-      display: block;
-      font-size: 25px;
-    }
-    &__list {
-      flex: 1;
-      gap: 0;
-      justify-content: space-evenly;
-      span {
-        display: none;
-      }
-      .language{
-        display: block;
-      }
-      a {
-        display: block;
-        padding: 10px 15px;
-      }
-      li {
-        display: flex;
-        flex: 1;
-        justify-content: center;
-      }
-      li + li {
-        border-left: 1px solid #505050;
-      }
-    }
-  }
-  .header {
-    &__btn {
-      flex: 1;
-      min-width: 300px;
-    }
-    &__buttons-inner {
-      flex-wrap: wrap;
-    }
-  }
+@media only screen and (max-width: 600px) {
+	.nav {
+		bottom: 0;
+		.container {
+			justify-content: center;
+		}
+		.logo {
+			display: none;
+		}
+		.icon {
+			display: block;
+			font-size: 25px;
+		}
+		&__list {
+			flex: 1;
+			gap: 0;
+			justify-content: space-evenly;
+			span {
+				display: none;
+			}
+			.language {
+				display: block;
+			}
+			a {
+				display: block;
+				padding: 10px 15px;
+			}
+			li {
+				display: flex;
+				flex: 1;
+				justify-content: center;
+			}
+			li + li {
+				border-left: 1px solid #505050;
+			}
+		}
+	}
+	.header {
+		&__btn {
+			flex: 1;
+			min-width: 300px;
+		}
+		&__buttons-inner {
+			flex-wrap: wrap;
+		}
+	}
 }

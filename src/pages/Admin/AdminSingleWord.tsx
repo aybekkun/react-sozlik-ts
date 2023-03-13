@@ -29,8 +29,8 @@ const AdminSingleWord = () => {
     { latin: "", kiril: "", description_latin: "", description_kiril: "" },
     async (args) => {
       const fd = new FormData();
-      fd.append("latin", latin.trim());
-      fd.append("kiril", kiril.trim());
+      fd.append("latin", latin.trim().toUpperCase());
+      fd.append("kiril", kiril.trim().toUpperCase());
       fd.append("description_latin", description_latin.trim());
       fd.append("description_kiril", description_kiril.trim());
       //@ts-ignore

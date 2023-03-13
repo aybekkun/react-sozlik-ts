@@ -1,74 +1,79 @@
 .footer {
-  background-color: #202020;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  color: #fff;
-  padding-top: 80px;
-  &__top {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 45px;
-  }
-  .logo {
-    display: block;
-    margin-bottom: 50px;
-  }
-  p {
-    margin-bottom: 10px;
-  }
-  .social {
-    display: flex;
-    gap: 22px;
-  }
-  &__bottom {
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 14px;
-    padding: 22px 0;
-    text-align: center;
-  }
-  &__right {
-    display: flex;
-  }
-  &__title {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 22px;
-    color: #ffffff;
-    margin-bottom: 20px;
-  }
-  &__list {
-    margin-left: 100px;
-  }
-  &__item {
-    margin-bottom: 10px;
-  }
+	background-color: #202020;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+	color: #fff;
+	padding-top: 80px;
+	&__top {
+		display: flex;
+		justify-content: space-between;
+		padding-bottom: 45px;
+	}
+	.logo {
+		display: block;
+		margin-bottom: 50px;
+	}
+	p {
+		margin-bottom: 10px;
+	}
+	.social {
+		display: flex;
+		gap: 22px;
+	}
+	&__bottom {
+		font-weight: 400;
+		font-size: 12px;
+		line-height: 14px;
+		padding: 22px 0;
+		text-align: center;
+	}
+	&__right {
+		display: flex;
+	}
+	&__title {
+    white-space: nowrap;
+		font-weight: 600;
+		font-size: 16px;
+		line-height: 22px;
+		color: #ffffff;
+		margin-bottom: 20px;
+	}
+	&__list {
+		margin-left: 50px;
+    max-width: 280px;
+    
+	}
+	&__item {
+		margin-bottom: 10px;
+	}
 }
 
-@media only screen and (max-width: 550px) {
-  .footer {
-    &__title{
-      white-space: nowrap;
-    }
-    &__top {
-      flex-direction: column;
-    }
-    &__left {
-      margin-bottom: 20px;
-    }
-    &__right{
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    &__list {
-      margin-left: 0;
-      li{
-        a{
-          white-space: nowrap;
-        }
-      }
-    }
-  }
+@media only screen and (max-width: 730px) {
+	.footer {
+		&__title {
+			white-space: nowrap;
+		}
+		&__top {
+			flex-direction: column;
+		}
+		&__left {
+			margin-bottom: 20px;
+		}
+		&__right {
+			justify-content: space-between;
+			flex-wrap: wrap;
+			gap: 20px;
+		}
+		&__list {
+			margin-left: 0;
+	
+
+			li {
+				a {
+					white-space: nowrap;
+				}
+			}
+		}
+	}
 }
